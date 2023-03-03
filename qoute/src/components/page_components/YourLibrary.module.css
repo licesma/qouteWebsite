@@ -1,0 +1,38 @@
+.center {
+  display: grid;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 280px auto;
+  grid-template-rows: auto;
+}
+
+.leftRail {
+  grid-column: 1;
+  display: grid;
+  margin-top: 40px;
+  gap: 40px;
+  height: fit-content;
+  grid-row: 1 / span 2;
+}
+
+.createButtonContainer {
+  background-color: rgba(107, 106, 106, 0);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px 0px 0px 18px;
+  transition: 600ms;
+}
+
+.middleContainer {
+  display: grid;
+}
+
+.quoteList {
+  margin: 40px 0px 0px 40px;
+  transition: 500ms;
+}

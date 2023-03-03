@@ -1,0 +1,173 @@
+.generalContainer {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: 880px 30px;
+}
+
+.dismissButtonContainer {
+  margin-top: 30px;
+  margin-left: 50px;
+}
+
+.formContainer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 500ms;
+  gap: 20px;
+  padding: 30px 0px;
+  border-radius: 0px 18px 18px 0px;
+  background-color: rgba(107, 106, 106, 0);
+  height: 0px;
+  width: 0px;
+  overflow: hidden;
+}
+
+.container {
+  display: grid;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.buttonContainer {
+  display: grid;
+  width: 100%;
+  grid-auto-flow: column;
+  gap: 20px;
+  justify-content: end;
+}
+
+.inputBox {
+  position: relative;
+  display: grid;
+  width: 800px;
+}
+
+.quoteInput {
+  width: 780px;
+  padding: 10px;
+  border: none;
+  background: white;
+  border-radius: 12px;
+  outline: none;
+  color: black;
+  font-size: 28px;
+  transition: 0.5s;
+  resize: none;
+}
+
+.infoInput {
+  width: 780px;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  font-size: 28px;
+  transition: 0.5s;
+}
+
+.hint {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 28px;
+  color: rgba(99, 71, 71, 0.859);
+  transition: 0.5s;
+  border-radius: 12px;
+}
+
+.inputBox textarea:focus ~ .hint,
+.inputBox textarea:valid ~ .hint,
+.inputBox input:focus ~ .hint {
+  transform: translateX(10px) translateY(-10px);
+  font-size: 20px;
+  padding: 0 10px;
+  background-color: rgb(74, 135, 191);
+  color: black;
+  border-radius: 12px;
+}
+
+.inputBox textarea:valid,
+.inputBox textarea:focus,
+.inputBox input:focus {
+  border: 1px solid rgb(46, 95, 141);
+}
+
+.resetButton {
+  width: 140px;
+  padding: 10px;
+  border: 2px solid rgba(99, 71, 71, 0.859);
+
+  background-color: rgba(99, 71, 71, 0.459);
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.addButton {
+  font-size: 18px;
+  font-weight: 500;
+  width: 100px;
+  display: grid;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--blue);
+  border: var(--blue) 0.125em solid;
+  padding: 8px;
+  margin-right: 20px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+
+  box-shadow: inset 0 0 0.5em 0 var(--blue), 0 0 0.2em 0 var(--blue);
+
+  position: relative;
+}
+
+.addButton::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(1em) rotateX(40deg) scale(1, 0.35);
+  filter: blur(1em);
+  opacity: 0.9;
+}
+
+.addButton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 0 2em 0.2em var(--blue);
+  opacity: 0;
+  background-color: var(--blue);
+  z-index: -1;
+  transition: opacity 100ms linear;
+}
+
+.addButton:hover,
+.addButton:focus {
+  color: var(--clr-bg);
+  text-shadow: none;
+}
+
+.addButton:hover::before,
+.addButton:focus::before {
+  opacity: 1;
+}
+.addButton:hover::after {
+  opacity: 1;
+}

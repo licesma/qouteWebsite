@@ -1,0 +1,8 @@
+{
+    "editor.mouseWheelZoom": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.sortImports": true
+    },
+}

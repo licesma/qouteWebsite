@@ -1,0 +1,17 @@
+.container {
+  display: grid;
+  grid-template-rows: auto auto;
+  width: fit-content;
+}
+.title {
+  font-size: 50px;
+  line-height: 60px;
+  font-weight: 600px;
+  width: fit-content;
+  letter-spacing: -5px;
+}
+
+.subtitle {
+  font-size: 12px;
+  width: fit-content;
+}
