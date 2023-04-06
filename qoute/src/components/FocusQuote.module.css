@@ -1,0 +1,9 @@
+.container {
+  display: grid;
+  justify-content: center;
+  margin: 20px;
+}
+.quoteContainer {
+  background-color: white;
+  min-width: 1000px;
+}

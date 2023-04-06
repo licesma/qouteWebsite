@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  gap: 60px;
+  gap: 20px;
   max-width: 900px;
   background-color: white;
   padding: 20px;

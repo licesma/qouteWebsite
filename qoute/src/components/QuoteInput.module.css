@@ -1,5 +1,7 @@
 .generalContainer {
   display: grid;
+  height: 0px;
+  overflow: hidden;
   grid-auto-flow: row;
   grid-template-columns: 880px 30px;
 }

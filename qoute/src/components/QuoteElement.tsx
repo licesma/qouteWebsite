@@ -17,14 +17,17 @@ export const QuoteElement: React.FunctionComponent<QuoteElementProps> = (
 
   return (
     <div className={styles.container}>
-      <div className={`${inter.className}`}>{`"${data.quote}"`}</div>
-      <div className={styles.sourceData}>
-        <div className={styles.origin}>{data.source}</div>
-        <div className={`${styles.author} ${montserrat.className}`}>
-          — {data.author}
-          {data.source ? (
-            <span className={styles.reference}>, {data.source}</span>
-          ) : null}
+      <div className={styles.activeBar} />
+      <div className={styles.textContainer}>
+        <div className={`${inter.className}`}>{`“${data.quote}”`}</div>
+        <div className={styles.sourceData}>
+          <div className={styles.origin}>{data.source}</div>
+          <div className={`${styles.author} ${montserrat.className}`}>
+            — {data.author}
+            {data.source ? (
+              <span className={styles.reference}>, {data.source}</span>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { timeStamp } from "console";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { firestore } from "./../app/firebase";
+import { useFirestore } from "./firebase/FirebaseProvider";
 import styles from "./QuoteInput.module.css";
 
 export interface QuoteInputProps {
@@ -14,6 +14,8 @@ export interface QuoteInputProps {
 
 export const QuoteInput: React.FunctionComponent<QuoteInputProps> = (props) => {
   const { show, onHide } = props;
+  const firestore = useFirestore();
+
   const resetInputFields = () => {
     setQuoteInput("");
     setAuthorInput("");
@@ -37,7 +39,7 @@ export const QuoteInput: React.FunctionComponent<QuoteInputProps> = (props) => {
   };
 
   const onAddClick = () => {
-    const docRef = doc(firestore, "quotes", "all_quotes");
+    const docRef = doc(firestore, "quotes", "yQ1QRTVFTNVPCtRRKICa");
     const data: QuoteData = {
       quote: quoteInput,
       author: authorInput,
@@ -58,7 +60,13 @@ export const QuoteInput: React.FunctionComponent<QuoteInputProps> = (props) => {
 
   React.useEffect(() => console.log(authorInput));
   return (
-    <div className={styles.generalContainer}>
+    <div
+      className={styles.generalContainer}
+      style={{
+        height: show ? "384px" : undefined,
+        width: show ? "1000px" : undefined,
+      }}
+    >
       <form onSubmit={handleSubmit}>
         <div
           className={styles.formContainer}

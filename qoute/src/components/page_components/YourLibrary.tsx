@@ -3,6 +3,7 @@ import { Inter, Montserrat } from "@next/font/google";
 import * as React from "react";
 import { CreateButton } from "../CreateButton";
 import { FilterBox } from "../FilterBox";
+import { Overlay } from "../Overlay";
 import { QuoteContainer } from "../QuoteContainer";
 import { QuoteInput } from "../QuoteInput";
 import { getUnrepeatedAuthors, getUnrepeatedSources } from "./Helper";
@@ -57,6 +58,7 @@ export const YourLibrary: React.FunctionComponent<YourLibraryProps> = (
 
   return (
     <div className={styles.center}>
+      <Overlay />
       <div className={styles.mainContainer}>
         <div className={styles.leftRail}>
           <div
@@ -83,7 +85,7 @@ export const YourLibrary: React.FunctionComponent<YourLibraryProps> = (
           <div
             className={styles.quoteList}
             style={{
-              transform: fullInput ? "translateY(0px)" : "translateY(-60px)",
+              transform: fullInput ? "translateY(-40px)" : "translateY(-6px)",
             }}
           >
             <QuoteContainer quotes={selectedQuotes} />

@@ -1,7 +1,9 @@
 import { Inter } from "@next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import { MainLogo } from "./MainLogo";
+import { Overlay } from "./Overlay";
 import styles from "./NavigationBar.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -56,6 +58,16 @@ export const NavigationBar: React.FunctionComponent<MainLogoProps> = (
           <span style={getSpanDynamicStyle("About", selectedItem)}>-&gt;</span>
         </h2>
       </div>
+
+      <a className={styles.card}>
+        <h2
+          className={inter.className}
+          style={getDynamicStyle("About", selectedItem)}
+        >
+          Sign In
+          <span style={getSpanDynamicStyle("About", selectedItem)}>-&gt;</span>
+        </h2>
+      </a>
     </div>
   );
 };

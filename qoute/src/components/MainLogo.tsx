@@ -10,9 +10,7 @@ export const MainLogo: React.FunctionComponent<MainLogoProps> = (props) => {
   return (
     <div className={styles.container}>
       <div className={`${styles.title} ${josefin.className}`}>Qoute</div>
-      <div className={styles.subtitle}>
-        Home of the finite organs of the infinite mind
-      </div>
+      <div className={styles.subtitle}>Finite organs of the infinite mind</div>
     </div>
   );
 };
