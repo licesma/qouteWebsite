@@ -1,6 +1,7 @@
 import { QuoteData } from "@/types/QuoteData";
 import { Inter, Montserrat } from "@next/font/google";
 import * as React from "react";
+import Image from "next/image";
 import styles from "./DismissButton.module.css";
 import { QuoteElement } from "./QuoteElement";
 
@@ -13,9 +14,14 @@ export const DismissButton: React.FunctionComponent<DismissButtonProps> = (
 ) => {
   const { onClick } = props;
   return (
-    <div className={styles.container} onClick={onClick}>
-      <div className={styles.incline} />
-      <div className={styles.decline} />
+    <div className={styles.contaffienr}>
+      <Image
+        className={styles.button}
+        alt={"ok"}
+        width={20}
+        height={20}
+        src={"./dismiss.svg"}
+      />
     </div>
   );
 };

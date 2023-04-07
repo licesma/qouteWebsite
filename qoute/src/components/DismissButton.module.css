@@ -8,24 +8,7 @@
   cursor: pointer;
 }
 
-.container:hover {
-  background-color: rgba(120, 120, 120, 0.4);
-}
-
-.incline {
-  height: 2px;
-  width: 30px;
-  grid-row: 1;
-  grid-column: 1;
-  background-color: rgb(47, 47, 47);
-  transform: rotate(-45deg) translate(-10px, 10px);
-}
-
-.decline {
-  height: 2px;
-  width: 30px;
-  grid-row: 1;
-  grid-column: 1;
-  transform: rotate(45deg) translate(10px, 10px);
-  background-color: rgb(47, 47, 47);
+.button:hover {
+  background-color: lightgray;
+  border-radius: 2px;
 }

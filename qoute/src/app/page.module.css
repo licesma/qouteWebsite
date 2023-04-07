@@ -4,7 +4,7 @@
   height: 100%;
   min-height: 100vh;
   grid-template-rows: auto 1fr;
-  background-color: rgba(133, 157, 165, 0.4);
+  background-color: rgba(210, 191, 168, 0.4);
 }
 
 .footer {

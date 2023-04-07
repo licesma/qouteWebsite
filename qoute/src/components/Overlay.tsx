@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./Overlay.module.css";
 import { ClientOnlyPortal } from "./ClientOnlyPortal";
 import { LoginOverlay } from "./LoginOverlay";
+import { DismissButton } from "./DismissButton";
 
 export interface OverlayProps {
   onDismiss: () => void;
@@ -12,9 +13,9 @@ export const Overlay: React.FunctionComponent<OverlayProps> = (props) => {
     <ClientOnlyPortal selector="#modal">
       <div className="backdrop">
         <div className="modal">
-          <button type="button" className="dismiss" onClick={onDismiss}>
-            X
-          </button>
+          <div className="dismiss">
+            <DismissButton onClick={onDismiss} />
+          </div>
           <LoginOverlay />
         </div>
         <style jsx>{OVERLAY_STYLE}</style>

@@ -58,7 +58,6 @@ export const YourLibrary: React.FunctionComponent<YourLibraryProps> = (
 
   return (
     <div className={styles.center}>
-      <Overlay />
       <div className={styles.mainContainer}>
         <div className={styles.leftRail}>
           <div
@@ -81,7 +80,6 @@ export const YourLibrary: React.FunctionComponent<YourLibraryProps> = (
           />
         </div>
         <div className={styles.middleContainer}>
-          <QuoteInput show={fullInput} onHide={onInputHide} />
           <div
             className={styles.quoteList}
             style={{
