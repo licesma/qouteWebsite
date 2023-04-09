@@ -14,7 +14,7 @@ export const DismissButton: React.FunctionComponent<DismissButtonProps> = (
 ) => {
   const { onClick } = props;
   return (
-    <div className={styles.contaffienr}>
+    <div className={styles.contaffienr} onClick={onClick}>
       <Image
         className={styles.button}
         alt={"ok"}

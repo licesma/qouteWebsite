@@ -6,6 +6,7 @@ import { FilterBox } from "../FilterBox";
 import { Overlay } from "../Overlay";
 import { QuoteContainer } from "../QuoteContainer";
 import { QuoteInput } from "../QuoteInput";
+import { StandardButton } from "../StandardButton";
 import { getUnrepeatedAuthors, getUnrepeatedSources } from "./Helper";
 import styles from "./YourLibrary.module.css";
 
@@ -17,13 +18,9 @@ export const YourLibrary: React.FunctionComponent<YourLibraryProps> = (
   props
 ) => {
   const { quotes } = props;
-  const [fullInput, setFullInput] = React.useState(false);
   const [selectedAuthors, setSelectedAuthors] = React.useState<string[]>([]);
   const [selectedSources, setSelectedSources] = React.useState<string[]>([]);
-
-  const onButtonCallback = () => {
-    setFullInput(!fullInput);
-  };
+  const [isQuickAddActive, setIsQuickAddActive] = React.useState<boolean>(true);
 
   const quotesByAuthor = React.useMemo(() => {
     const authorSet = new Set(selectedAuthors);
@@ -52,44 +49,41 @@ export const YourLibrary: React.FunctionComponent<YourLibraryProps> = (
     setSelectedSources(selectedValues);
   };
 
-  const onInputHide = () => {
-    setFullInput(false);
+  const onQuickAddHide = () => {
+    setIsQuickAddActive(false);
   };
 
   return (
-    <div className={styles.center}>
-      <div className={styles.mainContainer}>
-        <div className={styles.leftRail}>
-          <div
-            className={styles.createButtonContainer}
-            style={{ height: fullInput ? "384" : "100" }}
-          >
-            <CreateButton fullInput={fullInput} callback={onButtonCallback} />
+    <>
+      {isQuickAddActive ? <QuoteInput onHide={onQuickAddHide} /> : null}
+      <div className={styles.center}>
+        <div className={styles.mainContainer}>
+          <div className={styles.leftRail}>
+            <div
+              className={styles.createButtonContainer}
+              style={{ height: "100" }}
+            >
+              <StandardButton text={"Quick add"} callback={() => {}} />
+            </div>
+            <FilterBox
+              placeholder="Author"
+              filterOptions={getUnrepeatedAuthors(quotesBySource)}
+              onSelect={onAuthorFilterBoxChange}
+            />
+
+            <FilterBox
+              placeholder="Source"
+              filterOptions={getUnrepeatedSources(quotesByAuthor)}
+              onSelect={onSourceFilterBoxChange}
+            />
           </div>
-
-          <FilterBox
-            placeholder="Author"
-            filterOptions={getUnrepeatedAuthors(quotesBySource)}
-            onSelect={onAuthorFilterBoxChange}
-          />
-
-          <FilterBox
-            placeholder="Source"
-            filterOptions={getUnrepeatedSources(quotesByAuthor)}
-            onSelect={onSourceFilterBoxChange}
-          />
-        </div>
-        <div className={styles.middleContainer}>
-          <div
-            className={styles.quoteList}
-            style={{
-              transform: fullInput ? "translateY(-40px)" : "translateY(-6px)",
-            }}
-          >
-            <QuoteContainer quotes={selectedQuotes} />
+          <div className={styles.middleContainer}>
+            <div className={styles.quoteList}>
+              <QuoteContainer quotes={selectedQuotes} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

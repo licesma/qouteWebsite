@@ -8,6 +8,7 @@ import styles from "./NavigationBar.module.css";
 import { useAuth } from "./firebase/FirebaseProvider";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { onLog } from "firebase/app";
+import { LoginOverlay } from "./LoginOverlay";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +39,7 @@ export const NavigationBar: React.FunctionComponent<MainLogoProps> = (
   return (
     <>
       {isLoginOverlayEnabled ? (
-        <Overlay onDismiss={onLoginOverlayDismiss} />
+        <LoginOverlay onDismiss={onLoginOverlayDismiss} />
       ) : null}
       <div className={styles.container}>
         <MainLogo />
