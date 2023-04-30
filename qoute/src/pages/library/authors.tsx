@@ -1,7 +1,6 @@
 import { useFirestore } from "@/components/firebase/FirebaseProvider";
-import { FocusQuote } from "@/components/FocusQuote";
 import { NavigationBar } from "@/components/NavigationBar";
-import { YourLibrary } from "@/components/Library/MainLibraryContainer";
+import { MainLibraryContainerProps } from "@/components/Library/MainLibraryContainer";
 import { QuoteContainer } from "@/components/QuoteContainer";
 import { QuoteInput } from "@/components/QuoteInput";
 import { QuoteData } from "@/types/QuoteData";
@@ -9,7 +8,7 @@ import { Inter } from "@next/font/google";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import styles from "./../app/page.module.css";
+import styles from "./../../app/page.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,25 +18,22 @@ export default function Home() {
   const firestore = useFirestore();
   useEffect(() => {
     (async () => {
-      const docRef = doc(firestore, "quotes", "yQ1QRTVFTNVPCtRRKICa");
-      console.log(docRef);
-      const docSnap = await getDoc(docRef);
-      console.log(docSnap);
-      const docObject = docSnap.data();
-      console.log(docObject);
-      const arrayData: QuoteData[] = docObject ? Object.values(docObject) : [];
-      setQuotes(arrayData);
+      const quoteDocuments = await getDocs(collection(firestore, "quotes"));
+      const quotes = quoteDocuments.docs.map<QuoteData>(
+        (quoteDoc) => quoteDoc.data() as QuoteData
+      );
+      setQuotes(quotes);
       setHasFetched(true);
     })();
 
     return () => {};
-  }, []);
+  }, [firestore]);
 
   return (
     <>
       <main className={styles.main}>
         <NavigationBar />
-        <FocusQuote />
+        <MainLibraryContainerProps quotes={quotes} type={"Authors"} />
       </main>
       <div className={styles.footer}>Made with ♥ in CDMX.</div>
     </>

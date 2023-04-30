@@ -22,13 +22,15 @@
 
 .textContainer {
   display: grid;
-  gap: 20px;
+  font-size: 16px;
+  gap: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 .quote {
   text-align: left;
+  font-size: 14px;
 }
 
 .sourceData {
@@ -41,10 +43,17 @@
 }
 
 .author {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.authorR {
   margin-left: auto;
   font-weight: 500;
+  font-size: 16px;
 }
 
 .reference {
   font-weight: 400;
+  font-style: italic;
 }

@@ -1,0 +1,17 @@
+.filterContainer {
+  display: grid;
+  grid-auto-flow: column;
+  width: fit-content;
+  height: fit-content;
+  gap: 10px;
+}
+
+.filter {
+  min-width: 260px;
+  max-width: 800px;
+}
+
+.quoteList {
+  margin: 12px 0px 0px 00px;
+  transition: 500ms;
+}

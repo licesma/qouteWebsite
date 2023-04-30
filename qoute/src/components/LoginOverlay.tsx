@@ -1,6 +1,12 @@
 import { Josefin_Sans, Roboto, Roboto_Serif } from "@next/font/google";
 import Image from "next/image";
 import * as React from "react";
+import {
+  Auth,
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { sendSignInLinkToEmail } from "firebase/auth";
 import styles from "./LoginOverlay.module.css";
 import { useAuth } from "@/components/firebase/FirebaseProvider";
@@ -13,6 +19,17 @@ export interface LoginOverlayProps {
   onDismiss: () => void;
 }
 
+export const signInWithGoogle = (auth: Auth) => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("successful sign in");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const LoginOverlay: React.FunctionComponent<LoginOverlayProps> = (
   props
 ) => {
@@ -24,15 +41,15 @@ export const LoginOverlay: React.FunctionComponent<LoginOverlayProps> = (
   const emailInputRef = React.useRef<HTMLInputElement>(null);
   const auth = useAuth();
 
+  const onSignWithGoogle = () => {
+    signInWithGoogle(auth);
+    onDismiss();
+  };
+
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.target.reset();
   };
-
-  React.useEffect(() => {
-    console.log(auth);
-  });
-
   const onInputEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     const email = e.currentTarget.value;
     setInputEmail(email);
@@ -74,9 +91,6 @@ export const LoginOverlay: React.FunctionComponent<LoginOverlayProps> = (
     setIsValidEmail(false);
   };
 
-  React.useEffect(() => {
-    console.log(continueWithMail);
-  });
   return (
     <Overlay onDismiss={onDismiss}>
       <div
@@ -89,7 +103,7 @@ export const LoginOverlay: React.FunctionComponent<LoginOverlayProps> = (
         <div className={`${styles.signInLabel} ${roboto.className}`}>
           {"Let's get started!"}
         </div>
-        <button className={styles.googleButton} onClick={() => {}}>
+        <button className={styles.googleButton} onClick={onSignWithGoogle}>
           Continue with Google
         </button>
         <div className={styles.orContainer}>
@@ -155,6 +169,7 @@ export const LoginOverlay: React.FunctionComponent<LoginOverlayProps> = (
           <div className={roboto.className}>
             A verification email was successfully sent to: <b>{inputEmail}</b>
           </div>
+
           <Image
             className={styles.emailSentPicture}
             alt={"ok"}

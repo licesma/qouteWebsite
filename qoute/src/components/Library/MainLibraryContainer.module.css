@@ -6,7 +6,7 @@
 
 .mainContainer {
   display: grid;
-  grid-template-columns: 280px auto;
+  grid-template-columns: 280px minmax(100px, 1fr);
   grid-template-rows: auto;
 }
 
@@ -28,11 +28,7 @@
   transition: 600ms;
 }
 
-.middleContainer {
-  display: grid;
-}
-
-.quoteList {
-  margin: 40px 0px 0px 40px;
-  transition: 500ms;
+.contentContainer {
+  margin: 12px 0px 0px 40px;
+  width: 100%;
 }

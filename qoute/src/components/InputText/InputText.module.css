@@ -1,0 +1,43 @@
+.inputBox {
+  position: relative;
+  display: grid;
+}
+
+.inputElement {
+  width: 620px;
+  padding: 10px;
+  border: none;
+  border-radius: 12px;
+  border: 1px solid rgba(99, 71, 71, 0.859);
+  outline: none;
+  font-size: 16px;
+  transition: 0.5s;
+}
+
+.placeholder {
+  position: absolute;
+  left: 0;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 18px;
+  color: rgba(99, 71, 71, 0.859);
+  transition: 0.5s;
+  border-radius: 12px;
+}
+
+.inputBox textarea:focus ~ .placeholder,
+.inputBox textarea:valid ~ .placeholder,
+.inputBox input:focus ~ .placeholder {
+  transform: translateX(10px) translateY(-10px);
+  font-size: 14px;
+  padding: 0 10px;
+  background-color: rgb(3, 152, 97);
+  color: white;
+  border-radius: 12px;
+}
+
+.inputBox textarea:valid,
+.inputBox textarea:focus,
+.inputBox input:focus {
+  border: 1px solid rgb(3, 152, 97);
+}

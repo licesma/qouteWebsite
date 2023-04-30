@@ -1,0 +1,52 @@
+.leftMenuElement {
+  background-color: white;
+  padding: 0px;
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 20px;
+  display: grid;
+  grid-template-columns: 1;
+  grid-template-rows: 1;
+}
+
+.leftMenuTextElement {
+  background-color: rgb(238, 232, 217);
+  padding: 14px;
+  border-radius: 20px 0px 0px 20px;
+  color: rgb(46, 46, 46);
+  cursor: pointer;
+}
+
+.leftMenuTextElement:hover {
+  color: rgb(46, 46, 46);
+  font-weight: 700;
+}
+
+.topBar {
+  width: 100px;
+  height: 20px;
+  background-color: rgb(238, 232, 217);
+  margin-left: auto;
+}
+
+.bottomBar {
+  width: 100px;
+  height: 20px;
+  margin-left: auto;
+  background-color: rgb(238, 232, 217);
+}
+
+.topBarInner {
+  width: 100px;
+  height: 20px;
+  background-color: white;
+  margin-left: auto;
+  border-radius: 0px 0px 20px 0px;
+}
+
+.bottomBarInner {
+  width: 100px;
+  height: 20px;
+  margin-left: auto;
+  border-radius: 0px 20px 0px 0px;
+  background-color: white;
+}

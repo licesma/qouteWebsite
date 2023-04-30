@@ -1,6 +1,6 @@
 import { useFirestore } from "@/components/firebase/FirebaseProvider";
 import { NavigationBar } from "@/components/NavigationBar";
-import { YourLibrary } from "@/components/page_components/YourLibrary";
+import { MainLibraryContainerProps } from "@/components/Library/MainLibraryContainer";
 import { QuoteContainer } from "@/components/QuoteContainer";
 import { QuoteInput } from "@/components/QuoteInput";
 import { QuoteData } from "@/types/QuoteData";
@@ -33,7 +33,7 @@ export default function Home() {
     <>
       <main className={styles.main}>
         <NavigationBar />
-        <YourLibrary quotes={quotes} />
+        <MainLibraryContainerProps quotes={quotes} type={"AllQuotes"} />
       </main>
       <div className={styles.footer}>Made with ♥ in CDMX.</div>
     </>

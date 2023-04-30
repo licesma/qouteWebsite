@@ -19,11 +19,15 @@ export const QuoteElement: React.FunctionComponent<QuoteElementProps> = (
     <div className={styles.container}>
       <div className={styles.activeBar} />
       <div className={styles.textContainer}>
-        <div className={`${inter.className}`}>{`“${data.quote}”`}</div>
+        <div className={`${montserrat.className}`}>{`“${data.quote}”`}</div>
         <div className={styles.sourceData}>
-          <div className={styles.origin}>{data.source}</div>
+          <div className={`${styles.authorR} ${montserrat.className}`}>
+            — Albus Dumbledore
+          </div>
+        </div>
+        <div className={styles.sourceData}>
           <div className={`${styles.author} ${montserrat.className}`}>
-            — {data.author}
+            ~ {data.author}
             {data.source ? (
               <span className={styles.reference}>, {data.source}</span>
             ) : null}
