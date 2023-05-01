@@ -12,6 +12,8 @@ import styles from "../auth.module.css";
 import { useAuth } from "@/components/firebase/FirebaseProvider";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { UserRegister } from "@/components/page_components/UserRegister";
+import { ImageCropper } from "@/components/ImageCropper";
+import { Persona } from "@/components/Persona";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,7 +54,10 @@ export default function VerifySignInPage() {
         {!isUserVerified && !forceRegister ? (
           <h1>There is something wrong with your link</h1>
         ) : (
-          <UserRegister />
+          <>
+            <Persona size={301} name={"Eteba"} imageLink="fdasfsd" />
+            <UserRegister />
+          </>
         )}
       </main>
       <div className={styles.footer}>Made with ♥ in CDMX.</div>
