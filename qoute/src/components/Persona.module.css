@@ -1,6 +1,6 @@
 .container {
   border-radius: 50%;
-  background-color: red;
+  background-color: lightgray;
   display: grid;
   align-items: center;
   justify-content: center;

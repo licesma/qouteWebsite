@@ -14,6 +14,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { UserRegister } from "@/components/page_components/UserRegister";
 import { ImageCropper } from "@/components/ImageCropper";
 import { Persona } from "@/components/Persona";
+import { PersonaEditor } from "@/components/PersonaEditor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,7 +56,7 @@ export default function VerifySignInPage() {
           <h1>There is something wrong with your link</h1>
         ) : (
           <>
-            <Persona size={301} name={"Eteba"} imageLink="fdasfsd" />
+            <PersonaEditor size={400} />
             <UserRegister />
           </>
         )}

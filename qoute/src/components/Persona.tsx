@@ -26,7 +26,7 @@ export const Persona: React.FunctionComponent<PersonaProps> = (props) => {
           alt={"ok"}
           width={size}
           height={size}
-          src={"/gm_s.jpg"}
+          src={imageLink}
         />
       ) : (
         initials

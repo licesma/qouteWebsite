@@ -7,3 +7,24 @@
 .imgPreview {
   overflow: hidden;
 }
+
+.container {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.cropperContainer {
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden;
+}
+
+.buttonContainer {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.inputFile {
+  display: none;
+}

@@ -12,10 +12,19 @@ export const StandardButton: React.FunctionComponent<StandardButtonProps> = (
   props
 ) => {
   const { callback, text, fontSize } = props;
+  const halfSize = Math.floor(fontSize ? fontSize / 2 : 0);
   return (
     <button
       className={`${styles.button} ${open.className}`}
-      style={{ fontSize: `${fontSize}px` }}
+      style={
+        fontSize
+          ? {
+              fontSize: `${fontSize}px`,
+              padding: `${halfSize / 2}px ${halfSize}px`,
+              borderRadius: `${fontSize / 2}px`,
+            }
+          : undefined
+      }
       onClick={callback}
     >
       {text}
