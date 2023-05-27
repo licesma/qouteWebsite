@@ -6,16 +6,19 @@ export interface StandardButtonProps {
   text: string;
   callback: () => void;
   fontSize?: number;
+  className?: string;
 }
 
 export const StandardButton: React.FunctionComponent<StandardButtonProps> = (
   props
 ) => {
-  const { callback, text, fontSize } = props;
+  const { callback, className, text, fontSize } = props;
   const halfSize = Math.floor(fontSize ? fontSize / 2 : 0);
   return (
     <button
-      className={`${styles.button} ${open.className}`}
+      className={`${className ? styles.className + " " : ""}${styles.button} ${
+        open.className
+      }`}
       style={
         fontSize
           ? {

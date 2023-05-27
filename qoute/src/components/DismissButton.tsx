@@ -14,13 +14,13 @@ export const DismissButton: React.FunctionComponent<DismissButtonProps> = (
 ) => {
   const { onClick } = props;
   return (
-    <div className={styles.contaffienr} onClick={onClick}>
+    <div className={styles.container} onClick={onClick}>
       <Image
         className={styles.button}
         alt={"ok"}
-        width={20}
-        height={20}
-        src={"./dismiss.svg"}
+        width={30}
+        height={30}
+        src={"/dismiss.svg"}
       />
     </div>
   );

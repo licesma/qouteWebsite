@@ -56,6 +56,7 @@ export default function VerifySignInPage() {
           <h1>There is something wrong with your link</h1>
         ) : (
           <>
+            <Persona size={200} name={"Esteban Martinez"} imageLink={""} />
             <PersonaEditor size={400} />
             <UserRegister />
           </>

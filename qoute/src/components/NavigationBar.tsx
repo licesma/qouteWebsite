@@ -1,6 +1,4 @@
 import { Inter } from "@next/font/google";
-import Image from "next/image";
-import Link from "next/link";
 import * as React from "react";
 import { MainLogo } from "./MainLogo";
 import { Overlay } from "./Overlay";

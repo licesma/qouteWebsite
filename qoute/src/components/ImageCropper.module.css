@@ -13,6 +13,14 @@
   grid-auto-flow: row;
 }
 
+.browsePlaceholder {
+  background-color: rgb(236, 236, 236);
+  display: grid;
+  border-radius: 10px;
+  border: 2px dashed #0086fe;
+  cursor: pointer;
+}
+
 .cropperContainer {
   border-radius: 10px;
   width: fit-content;
@@ -25,6 +33,33 @@
   grid-auto-flow: column;
 }
 
+.cropButton {
+  margin-left: auto;
+}
+
+.imageIconContainer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
 .inputFile {
   display: none;
+}
+
+.imagePickerLabel {
+  color: #0086fe;
+  text-align: center;
+}
+
+.browseLabel {
+  color: #303030;
+}
+
+.cropperLabel {
+  margin: 10px 0px 5px 0px;
+}
+
+.cropperMenu {
+  transform: translateY(-30px);
 }

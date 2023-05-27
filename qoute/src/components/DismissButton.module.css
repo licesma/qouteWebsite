@@ -12,3 +12,7 @@
   background-color: lightgray;
   border-radius: 2px;
 }
+
+.button {
+  cursor: pointer;
+}

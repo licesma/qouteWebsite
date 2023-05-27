@@ -1,5 +1,4 @@
 import { Inter } from "@next/font/google";
-import Image from "next/image";
 import * as React from "react";
 import styles from "./InputText.module.css";
 
