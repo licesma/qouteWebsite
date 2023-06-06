@@ -7,6 +7,7 @@ import { useAuth } from "./firebase/FirebaseProvider";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { onLog } from "firebase/app";
 import { LoginOverlay } from "./LoginOverlay";
+import { ProfilePicture } from "./ProfilePicture";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -89,10 +90,10 @@ export const NavigationBar: React.FunctionComponent<MainLogoProps> = (
               setIsLoginOverlayEnabled(true);
             }}
           >
-            {" "}
             {isUserSigned ? (
               <div className={`${styles.userItem} ${inter.className}`}>
-                {"Esteban"}
+                <ProfilePicture size={30} />
+                <div className={styles.userName}>{"Esteban Mtz"}</div>
               </div>
             ) : (
               <div className={`${inter.className}`}>{"Sign in"} </div>
@@ -103,7 +104,8 @@ export const NavigationBar: React.FunctionComponent<MainLogoProps> = (
             style={{ display: isUserSigned ? undefined : "none" }}
           >
             <div className={`${styles.userItem} ${inter.className}`}>
-              {"Sign in"}{" "}
+              <ProfilePicture size={30} />
+              <div className={styles.userName}>{"Esteban Mtz"}</div>
             </div>
             <div className={`${styles.otherItem} ${inter.className}`}>
               {"Account"}{" "}

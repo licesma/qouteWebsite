@@ -5,6 +5,7 @@ import { StandardButton } from "./StandardButton";
 import styles from "./ImageCropper.module.css";
 import * as React from "react";
 import { DismissButton } from "./DismissButton";
+import { useProfilePicture } from "@/components/firebase/Hook/ProfilePicture";
 
 const defaultSrc =
   "https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg";
@@ -20,6 +21,8 @@ export const ImageCropper: React.FunctionComponent<ImageCropperProps> = (
   const { size, onCrop, onDismiss } = props;
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [image, setImage] = React.useState("");
+  const [file, setFile] = React.useState<Blob | undefined>(undefined);
+  const { setProfilePictureCallback } = useProfilePicture();
   const [cropData, setCropData] = React.useState("#");
   const [isDragging, setIsDragging] = React.useState(false);
   const cropperRef = React.createRef<ReactCropperElement>();
@@ -30,8 +33,10 @@ export const ImageCropper: React.FunctionComponent<ImageCropperProps> = (
     let files;
     if (e.dataTransfer) {
       files = e.dataTransfer.files;
+      setFile(e.dataTransfer.files[0]);
     } else if (e.target) {
       files = e.target.files;
+      setFile(e.target.files[0]);
     }
     const reader = new FileReader();
     reader.onload = () => {
@@ -69,10 +74,20 @@ export const ImageCropper: React.FunctionComponent<ImageCropperProps> = (
     }
   };
 
-  const getCropData = () => {
-    if (typeof cropperRef.current?.cropper !== "undefined") {
-      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
-      onCrop(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+  const getCropFunction = (save: boolean) => () => {
+    const cropperCanvas = cropperRef.current?.cropper.getCroppedCanvas();
+    if (typeof cropperCanvas !== "undefined") {
+      const cropUrl = cropperCanvas.toDataURL();
+      setCropData(cropUrl);
+      onCrop(cropUrl);
+      if (save) {
+        cropperRef.current?.cropper.getCroppedCanvas().toBlob((file) => {
+          setProfilePictureCallback &&
+            file &&
+            setProfilePictureCallback(file, cropUrl);
+          onDismiss();
+        });
+      }
     }
   };
 
@@ -189,14 +204,14 @@ export const ImageCropper: React.FunctionComponent<ImageCropperProps> = (
               className={styles.cropButton}
               fontSize={16}
               text={"Preview"}
-              callback={getCropData}
+              callback={getCropFunction(false)}
             />
             <div className={styles.cropButton}>
               <StandardButton
                 className={styles.cropButton}
                 fontSize={16}
                 text={"Save"}
-                callback={getCropData}
+                callback={getCropFunction(true)}
               />
             </div>
           </div>

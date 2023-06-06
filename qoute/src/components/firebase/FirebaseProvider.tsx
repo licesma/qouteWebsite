@@ -1,8 +1,11 @@
 import { FirebaseApp } from "firebase/app";
 import { Auth } from "firebase/auth";
 import { Firestore } from "firebase/firestore";
+import { getAuth, updateProfile } from "firebase/auth";
+import type { FirebaseStorage } from "firebase/storage";
 import * as React from "react";
 import { Firebase } from "./firebase";
+import { createFalse } from "typescript";
 
 export const FirebaseContext = React.createContext<Firebase | undefined>(
   undefined
@@ -18,9 +21,6 @@ export const FirebaseProvider: React.FunctionComponent<
   const [firebaseApp, setFirebaseApp] = React.useState<Firebase | undefined>(
     new Firebase()
   );
-  React.useEffect(() => {
-    console.log("Esteban");
-  }, []);
 
   return (
     <FirebaseContext.Provider value={firebaseApp}>
@@ -39,12 +39,38 @@ export const useFirebase = (): Firebase => {
   return firebaseContext;
 };
 
+export const useStorage = (): FirebaseStorage => {
+  return useFirebase().getStorage();
+};
+
 export const useFirestore = (): Firestore => {
   const firebase = useFirebase();
   return firebase.getFirestore();
 };
 
-export const useAuth = (): Auth => {
+export interface UseAuthProps {
+  auth: Auth;
+  updateUserName: (name: string) => void;
+}
+
+export const useAuth = (): UseAuthProps => {
   const firebase = useFirebase();
-  return firebase.getAuth();
+  const auth = firebase.getAuth();
+  const updateUserName = React.useCallback(
+    (userName: string) => {
+      if (auth.currentUser) {
+        updateProfile(auth.currentUser, {
+          displayName: userName,
+        })
+          .then(() => {
+            alert("User name updated successfully.");
+          })
+          .catch((error) => {
+            console.error("Fail to update user name.");
+          });
+      }
+    },
+    [auth]
+  );
+  return { auth, updateUserName };
 };

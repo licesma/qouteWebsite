@@ -8,15 +8,11 @@ import { StandardButton } from "../StandardButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
-interface UserRegisterProps {
-  quotes: QuoteData[];
-}
+interface UserRegisterProps {}
 
 export const UserRegister: React.FunctionComponent<UserRegisterProps> = (
   props
 ) => {
-  const { quotes } = props;
-
   const onChange = (input: string) => {};
 
   return (

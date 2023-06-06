@@ -7,22 +7,44 @@ const inter = Inter({ subsets: ["latin"] });
 export interface InputTextProps {
   placeholder: string;
   onChange: (input: string) => void;
+  onNotDefault?: () => void;
+  onDefault?: () => void;
   width?: number;
+  defaultValue?: string;
+  onCurrent?: () => void;
 }
 
 export const InputText: React.FunctionComponent<InputTextProps> = (props) => {
-  const { placeholder, onChange, width } = props;
-  const [inputValue, setInputValue] = React.useState<string>("");
+  const {
+    placeholder,
+    onChange,
+    defaultValue,
+    width,
+    onDefault,
+    onNotDefault,
+  } = props;
+  const [inputValue, setInputValue] = React.useState<string>(
+    defaultValue ?? ""
+  );
 
   const onInputVaueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-    onChange(event.target.value);
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    onChange(newValue);
+    newValue === defaultValue
+      ? onDefault && onDefault()
+      : onNotDefault && onNotDefault();
   };
+
+  React.useEffect(() => {
+    defaultValue && setInputValue(defaultValue);
+  }, [defaultValue]);
 
   return (
     <div className={styles.inputBox}>
       <input
         className={`${inter.className} ${styles.inputElement}`}
+        defaultValue={defaultValue}
         type={"text"}
         style={getInputTextDynamicStyle(inputValue, width)}
         required={false}
