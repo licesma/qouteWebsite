@@ -8,6 +8,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { onLog } from "firebase/app";
 import { LoginOverlay } from "./LoginOverlay";
 import { ProfilePicture } from "./ProfilePicture";
+import { useCurrentUser } from "@/components/firebase/Hook/Auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,11 @@ export const NavigationBar: React.FunctionComponent<MainLogoProps> = (
   const [isLoginOverlayEnabled, setIsLoginOverlayEnabled] =
     React.useState(false);
   const [isUserSigned, setIsUserSigned] = React.useState(false);
-  const auth = useAuth();
+  const { id } = useCurrentUser();
 
   React.useEffect(() => {
-    return onAuthStateChanged(auth, (user) => {
-      setIsUserSigned(user !== null);
-    });
-  }, []);
+    setIsUserSigned(id !== undefined);
+  }, [id]);
 
   const onLoginOverlayDismiss = () => {
     setIsLoginOverlayEnabled(false);

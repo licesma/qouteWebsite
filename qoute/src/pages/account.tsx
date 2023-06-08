@@ -9,7 +9,10 @@ import {
 } from "firebase/auth";
 import * as React from "react";
 import styles from "./auth.module.css";
-import { useProfilePicture } from "@/components/firebase/Hook/ProfilePicture";
+import {
+  useFetchProfilePicture,
+  useProfilePicture,
+} from "@/components/firebase/Hook/ProfilePicture";
 import { useCurrentUser } from "@/components/firebase/Hook/Auth";
 import { UserRegister } from "@/components/page_components/AccountEditor";
 import { ImageCropper } from "@/components/ImageCropper";
@@ -23,7 +26,7 @@ const forceRegister = true;
 export default function VerifySignInPage() {
   const [isFirstTimeUser, setIsFirstTimeUser] = React.useState(false);
   const [isUserVerified, setIsUserVerified] = React.useState(false);
-  const profilePicture = useProfilePicture();
+  const { data: profilePicture } = useFetchProfilePicture();
   const { name, email } = useCurrentUser();
 
   React.useEffect(() => console.log(profilePicture));
@@ -48,7 +51,7 @@ export default function VerifySignInPage() {
             <Persona
               size={200}
               name={"Esteban Martinez"}
-              imageLink={profilePicture.profilePicture}
+              imageLink={profilePicture}
             />
             <PersonaEditor size={400} />
             <UserRegister />
