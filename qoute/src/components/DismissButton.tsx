@@ -18,8 +18,8 @@ export const DismissButton: React.FunctionComponent<DismissButtonProps> = (
       <Image
         className={styles.button}
         alt={"ok"}
-        width={30}
-        height={30}
+        width={24}
+        height={24}
         src={"/dismiss.svg"}
       />
     </div>

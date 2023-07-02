@@ -12,6 +12,7 @@ export interface MultiSelectBoxProps extends SelectBoxProps {
 
 export interface SingleSelectBoxProps extends SelectBoxProps {
   onSelect: (selectedOptions: string) => void;
+  defaultValue?: string;
 }
 
 export interface FilterOption {

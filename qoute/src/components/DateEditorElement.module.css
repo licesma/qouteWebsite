@@ -1,19 +1,29 @@
 .valueContainer {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 600px 200px;
   margin: 20px 0px;
-  margin-left: 0px;
   align-items: center;
 }
 
 .controlButtons {
   display: grid;
   grid-auto-flow: column;
+  margin-left: auto;
   width: fit-content;
   margin-top: 8px;
   gap: 10px;
 }
 
+.generalContainer {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 600px 200px;
+}
+
 .editorElementContainer {
+  width: 800px;
+}
+
+.actionButtonContainer {
+  width: fit-content;
 }

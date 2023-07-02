@@ -26,7 +26,7 @@ export const Persona: React.FunctionComponent<PersonaProps> = (props) => {
         {imageLink ? (
           <Image
             className={styles.container}
-            alt={"ok"}
+            alt={name ?? "profile-picture"}
             width={size}
             height={size}
             src={imageLink}

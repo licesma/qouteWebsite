@@ -60,6 +60,11 @@
   margin: 10px 0px 5px 0px;
 }
 
+.saveButton {
+  margin-left: auto;
+}
+
 .cropperMenu {
-  transform: translateY(-40px);
+  display: grid;
+  gap: 10px;
 }

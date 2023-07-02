@@ -4,6 +4,7 @@ import { DatePicker } from "../DatePicker";
 import styles from "./AccountEditor.module.css";
 import { StandardButton } from "../StandardButton";
 import { EditorElement } from "../EditorElement";
+import { DateEditorElement } from "../DateEditorElement";
 import { useAuth } from "../firebase/FirebaseProvider";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 
@@ -11,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 interface AccountEditorProps {}
 
-export const UserRegister: React.FunctionComponent<AccountEditorProps> = (
+export const AccountEditor: React.FunctionComponent<AccountEditorProps> = (
   props
 ) => {
   const { auth, updateUserName } = useAuth();
@@ -21,13 +22,16 @@ export const UserRegister: React.FunctionComponent<AccountEditorProps> = (
   React.useEffect(() => console.log(auth));
 
   const [nameValue, setNameValue] = React.useState<string>("");
-  const [birthDayValue, setBirthDayValue] = React.useState<number>();
-  const [birthMonthValue, setBirthMonthValue] = React.useState<number>();
-  const [birthYearValue, setBirthYearValue] = React.useState<number>();
+  const [birthDateValue, setBirthDateValue] = React.useState<Date>(new Date());
 
   const onUserNameSave = (userName: string) => {
     setNameValue(userName);
     updateUserName(userName);
+  };
+
+  const onBirthDateSave = (date: Date) => {
+    setBirthDateValue(date);
+    //TODO: do api call
   };
 
   React.useEffect(() => {
@@ -43,9 +47,14 @@ export const UserRegister: React.FunctionComponent<AccountEditorProps> = (
         currentValue={nameValue}
         onSave={onUserNameSave}
       />
+      <DateEditorElement
+        title={"Birth Date"}
+        currentValue={birthDateValue}
+        onSave={onBirthDateSave}
+      />
       <h3 className={inter.className}>Birth Date</h3>
       <div className={styles.dateInput}>
-        <DatePicker />
+        <DatePicker defaultValue={new Date()} />
       </div>
       <div className={styles.buttonContainer}>
         <StandardButton text={"Create Account"} callback={() => {}} />

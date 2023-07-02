@@ -15,7 +15,7 @@ import { AuthorLibrary } from "./AuthorLibrary";
 export type LibraryType = "AllQuotes" | "Favorites" | "Authors" | "Sources";
 
 interface MainLibraryContainerProps {
-  quotes: QuoteData[];
+  quotes: QuoteData[] | undefined;
   type: LibraryType;
 }
 

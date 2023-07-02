@@ -2,6 +2,7 @@ import { FirebaseProvider } from "@/components/firebase/FirebaseProvider";
 import type { AppProps } from "next/app";
 import * as React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./../app/globals.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -11,6 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <FirebaseProvider>
         <Component {...pageProps} />
       </FirebaseProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

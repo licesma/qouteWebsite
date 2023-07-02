@@ -9,25 +9,12 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import styles from "./../app/page.module.css";
+import { useQuotesData } from "@/components/api/AllQuotes";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [hasFecthed, setHasFetched] = useState<Boolean>(false);
-  const [quotes, setQuotes] = useState<QuoteData[]>([]);
-  const firestore = useFirestore();
-  useEffect(() => {
-    (async () => {
-      const quoteDocuments = await getDocs(collection(firestore, "quotes"));
-      const quotes = quoteDocuments.docs.map<QuoteData>(
-        (quoteDoc) => quoteDoc.data() as QuoteData
-      );
-      setQuotes(quotes);
-      setHasFetched(true);
-    })();
-
-    return () => {};
-  }, [firestore]);
+  const { data: quotes } = useQuotesData();
 
   return (
     <>

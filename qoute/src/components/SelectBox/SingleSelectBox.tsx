@@ -10,20 +10,22 @@ export const SingleSelectBox: React.FunctionComponent<SingleSelectBoxProps> = (
   const {
     filterOptions: stringOptions,
     onSelect: onStringSelect,
+    defaultValue,
     placeholder,
     width,
   } = props;
+
+  const [overrideDefault, setOverrideDefault] = React.useState<boolean>(false);
 
   const options: FilterOption[] = stringOptions?.map((stringOption) => ({
     value: stringOption,
     label: stringOption,
   }));
 
-  React.useEffect(() => console.log(stringOptions));
-
   const onSelect = (choice: MultiValue<FilterOption>) => {
     const choiceObj: any = choice; //TODO: Fix, I don't like this but Select is forcing a MultiValue type fsr.
     onStringSelect(choiceObj.value);
+    setOverrideDefault(true);
   };
 
   return (
@@ -32,6 +34,11 @@ export const SingleSelectBox: React.FunctionComponent<SingleSelectBoxProps> = (
         closeMenuOnSelect={true}
         instanceId="authorSelector"
         placeholder={placeholder}
+        value={
+          overrideDefault
+            ? undefined
+            : ({ value: defaultValue, label: defaultValue } as FilterOption)
+        }
         options={options}
         styles={colourStyles}
         onChange={onSelect}

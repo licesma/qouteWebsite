@@ -9,14 +9,9 @@ import {
 } from "firebase/auth";
 import * as React from "react";
 import styles from "./auth.module.css";
-import {
-  useFetchProfilePicture,
-  useProfilePicture,
-} from "@/components/firebase/Hook/ProfilePicture";
+import { useFetchProfilePicture } from "@/components/firebase/Hook/ProfilePicture";
 import { useCurrentUser } from "@/components/firebase/Hook/Auth";
-import { UserRegister } from "@/components/page_components/AccountEditor";
-import { ImageCropper } from "@/components/ImageCropper";
-import { Persona } from "@/components/Persona";
+import { AccountEditor } from "@/components/page_components/AccountEditor";
 import { PersonaEditor } from "@/components/PersonaEditor";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -48,17 +43,15 @@ export default function VerifySignInPage() {
           <h1>There is something wrong with your link</h1>
         ) : (
           <>
-            <Persona
-              size={200}
-              name={"Esteban Martinez"}
+            <PersonaEditor
+              size={400}
+              name={"Esteban Martínez"}
               imageLink={profilePicture}
             />
-            <PersonaEditor size={400} />
-            <UserRegister />
+            <AccountEditor />
           </>
         )}
       </main>
-      <div className={styles.footer}>Made with ♥ in CDMX.</div>
     </>
   );
 }

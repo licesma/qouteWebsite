@@ -1,0 +1,6 @@
+.datePickerContainer {
+  display: grid;
+  grid-auto-flow: column;
+  width: fit-content;
+  gap: 10px;
+}

@@ -9,7 +9,7 @@ import {
 import { QuoteData } from "@/types/QuoteData";
 
 export interface AllQuotesLibraryProps {
-  quotes: QuoteData[];
+  quotes: QuoteData[] | undefined;
 }
 
 export const AllQuotesLibrary: React.FunctionComponent<
@@ -21,20 +21,20 @@ export const AllQuotesLibrary: React.FunctionComponent<
 
   const quotesByAuthor = React.useMemo(() => {
     const authorSet = new Set(selectedAuthors);
-    return quotes.filter(
+    return quotes?.filter(
       (quote) => authorSet.size === 0 || authorSet.has(quote.author)
     );
   }, [quotes, selectedAuthors]);
 
   const quotesBySource = React.useMemo(() => {
     const sourceSet = new Set(selectedSources);
-    return quotes.filter(
+    return quotes?.filter(
       (quote) => sourceSet.size === 0 || sourceSet.has(quote.source)
     );
   }, [quotes, selectedSources]);
 
   const selectedQuotes = React.useMemo(
-    () => quotesByAuthor.filter((quote) => quotesBySource.includes(quote)),
+    () => quotesByAuthor?.filter((quote) => quotesBySource?.includes(quote)),
     [quotesByAuthor, quotesBySource]
   );
 

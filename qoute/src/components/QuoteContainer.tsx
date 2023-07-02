@@ -5,7 +5,7 @@ import styles from "./QuoteContainer.module.css";
 import { QuoteElement } from "./QuoteElement";
 
 interface QuoteContainerProps {
-  quotes: QuoteData[];
+  quotes: QuoteData[] | undefined;
 }
 
 export const QuoteContainer: React.FunctionComponent<QuoteContainerProps> = ({
@@ -13,7 +13,7 @@ export const QuoteContainer: React.FunctionComponent<QuoteContainerProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      {quotes.map((quote, index) => (
+      {quotes?.map((quote, index) => (
         <QuoteElement key={index} quoteData={quote} />
       ))}
     </div>

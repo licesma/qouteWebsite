@@ -99,6 +99,7 @@
 }
 
 .userMenu {
+  margin-bottom: 6px;
   position: relative;
   width: fit-content;
 }

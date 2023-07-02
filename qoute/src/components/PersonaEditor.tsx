@@ -5,23 +5,37 @@ import * as React from "react";
 
 export interface PersonaEditorProps {
   size: number;
+  name: string;
+  imageLink?: string;
 }
 
 export const PersonaEditor: React.FunctionComponent<PersonaEditorProps> = (
   props
 ) => {
-  const { size } = props;
+  const { imageLink, name, size } = props;
   const [croppedPersona, setCroppedPersona] = React.useState<string>("");
   const [isEditOn, setIsEditOn] = React.useState<boolean>(false);
+  const [isPreviewOn, setIsPreviewOn] = React.useState<boolean>(false);
   const onCrop = (croppedLink: string) => {
     setCroppedPersona(croppedLink);
   };
+
+  const onDismiss = () => {
+    setIsEditOn(false);
+    setIsPreviewOn(false);
+  };
+
+  const onSave = () => {
+    setIsEditOn(false);
+    setIsPreviewOn(true);
+  };
+
   return (
     <div className={styles.container}>
       <Persona
         size={size / 2}
-        name={"Esteban Martinez"}
-        imageLink={croppedPersona}
+        name={name}
+        imageLink={isPreviewOn ? croppedPersona : imageLink}
         onEditClick={() => setIsEditOn(true)}
         isEditable={!isEditOn}
       />
@@ -29,7 +43,9 @@ export const PersonaEditor: React.FunctionComponent<PersonaEditorProps> = (
         <ImageCropper
           size={size / 2}
           onCrop={onCrop}
-          onDismiss={() => setIsEditOn(false)}
+          onDismiss={onDismiss}
+          onPreview={() => setIsPreviewOn(true)}
+          onSave={onSave}
         />
       ) : undefined}
     </div>
