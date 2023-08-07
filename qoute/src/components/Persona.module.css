@@ -12,6 +12,17 @@
   grid-column: 1;
   grid-row: 1;
   text-align: center;
+  user-select: none;
+}
+
+.filter {
+  width: 200px;
+  height: 200px;
+  grid-row: 1;
+  grid-column: 1;
+  border-radius: 50%;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .editGrid {
@@ -31,6 +42,7 @@
   grid-column: 3;
   margin: auto;
   cursor: pointer;
+  visibility: hidden;
 }
 
 .editButtonImage {
@@ -38,6 +50,7 @@
   grid-column: 3;
   margin: auto;
   cursor: pointer;
+  visibility: hidden;
 }
 
 .editTooltip {
@@ -56,5 +69,18 @@
 
 .editButton:hover ~ .editTooltip,
 .editButtonImage:hover ~ .editTooltip {
+  visibility: visible;
+}
+
+.editGrid:hover > .editButton,
+.editGrid:hover > .editButtonImage {
+  visibility: visible;
+}
+
+.editGrid:hover ~ .filter {
+  visibility: visible;
+}
+
+.container:hover > .filter {
   visibility: visible;
 }

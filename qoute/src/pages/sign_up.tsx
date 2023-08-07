@@ -1,16 +1,16 @@
+import { useAuth } from "@/components/firebase/FirebaseProvider";
 import { Inter } from "@next/font/google";
-import { FirebaseAuth } from "react-firebaseui";
 import {
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
+  User,
   UserCredential,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
   sendEmailVerification,
   updateProfile,
-  User,
 } from "firebase/auth";
 import * as React from "react";
+import { FirebaseAuth } from "react-firebaseui";
 import styles from "./auth.module.css";
-import { useAuth } from "@/components/firebase/FirebaseProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +34,6 @@ export default function AuthPage() {
   };
 
   React.useEffect(() => {
-    console.log("ok");
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
@@ -54,7 +53,6 @@ export default function AuthPage() {
         userEmail,
         userPassword
       );
-      console.log("Whaat");
       if (auth.currentUser) {
         userDisplayName &&
           updateProfile(auth.currentUser, {
@@ -62,9 +60,7 @@ export default function AuthPage() {
           });
         sendEmailVerification(auth.currentUser);
       }
-    } catch (error) {
-      console.log("error");
-    }
+    } catch (error) {}
   };
 
   const logout = async () => {};

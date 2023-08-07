@@ -1,6 +1,6 @@
-import { SingleSelectBox } from "./SelectBox/SingleSelectBox";
 import * as React from "react";
 import styles from "./DatePicker.module.css";
+import { SingleSelectBox } from "./SelectBox/SingleSelectBox";
 
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1).map((num) =>
   num.toString()
@@ -37,7 +37,7 @@ export const DatePicker: React.FunctionComponent<DatePickerProps> = (props) => {
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(
     undefined
   );
-  React.useEffect(() => console.log(selectedDate));
+
   const [defaultDay, setDefaultDay] = React.useState<string | undefined>(
     undefined
   );

@@ -3,8 +3,8 @@ import { connectFirestoreEmulator, getFirestore } from "@firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { FirebaseApp, initializeApp } from "firebase/app";
 import type { Auth } from "firebase/auth";
-import { FirebaseStorage, getStorage } from "firebase/storage";
 import type { Firestore } from "firebase/firestore";
+import { FirebaseStorage, getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -36,7 +36,7 @@ export class Firebase {
     this.firestore = getFirestore(this.app);
     this.storage = getStorage(this.app);
     this.auth = getAuth(this.app);
-    if (typeof window === "undefined" || !window._init) {
+    if (typeof window !== "undefined" && !window._init) {
       //necessary for not initializing emulator twice
       connectFirestoreEmulator(this.firestore, "localhost", 8080);
       if (typeof window !== "undefined") {

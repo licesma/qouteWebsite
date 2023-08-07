@@ -5,13 +5,14 @@ import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import * as React from "react";
 import styles from "../auth.module.css";
 import { useAuth } from "@/components/firebase/FirebaseProvider";
-import { useFetchProfilePicture } from "@/components/firebase/Hook/ProfilePicture";
+import {
+  useFetchProfilePicture,
+  useUpdateProfilePicture,
+} from "@/components/firebase/Hook/ProfilePicture";
 import { useCurrentUser } from "@/components/firebase/Hook/Auth";
 import { UserRegister } from "@/components/page_components/UserRegister";
 import { Persona } from "@/components/Persona";
-import { PersonaEditor } from "@/components/PersonaEditor";
-import { Modal } from "@/components/Modal";
-import { ChangeProfilePictureModal } from "@/components/ChangeProfilePictureModal";
+import { ChangePictureModal } from "@/components/ChangePictureModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function VerifySignInPage() {
   const { data: profilePicture } = useFetchProfilePicture();
   const emailAddress = router.query.emailAddress;
   const { name, email } = useCurrentUser();
+  const profilePictureMutator = useUpdateProfilePicture();
 
   React.useEffect(() => {
     if (
@@ -52,10 +54,15 @@ export default function VerifySignInPage() {
     <>
       <main className={styles.main}>
         {isModalOpen && (
-          <ChangeProfilePictureModal
+          <ChangePictureModal
             isOpen={isModalOpen}
             onClose={() => {
               setIsModalOpen(false);
+            }}
+            pictureSrc={profilePicture}
+            name={name}
+            updatePictureCallback={(file: Blob) => {
+              profilePictureMutator.mutate(file);
             }}
           />
         )}

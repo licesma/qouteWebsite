@@ -1,8 +1,4 @@
 .container {
   display: grid;
   gap: 20px;
-  max-width: 900px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 20px;
 }

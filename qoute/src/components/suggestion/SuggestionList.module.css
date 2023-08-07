@@ -1,0 +1,10 @@
+.container {
+  width: 300px;
+  height: fit-content;
+  position: absolute;
+  transform: translateY(10px);
+  border-radius: 10px;
+  border: 1px solid gray;
+  background-color: white;
+  overflow: hidden;
+}

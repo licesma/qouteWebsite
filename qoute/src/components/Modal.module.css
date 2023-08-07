@@ -13,7 +13,7 @@
 }
 
 .modalFrame {
-  border-radius: 10px;
+  border-radius: 16px;
   background-color: white;
   display: grid;
   padding-bottom: 10px;
@@ -21,11 +21,23 @@
   font-size: 2rem;
 }
 
-.modalContent {
-  width: 400px;
-  background-color: white;
+.header {
+  padding-left: 30px;
+  border-radius: 16px 16px 0px 0px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 30px;
+  width: calc(100%);
+  color: #505050;
+  background-color: #eaeaea;
+}
+
+.title {
+  margin: auto;
+  font-size: 20px;
 }
 
 .dismissButton {
+  width: fit-content;
   margin: 6px 6px 0px auto;
 }

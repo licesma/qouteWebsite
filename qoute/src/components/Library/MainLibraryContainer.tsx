@@ -1,28 +1,36 @@
+import { useUserQuotes } from "@/api/firebase/UserQuotes";
+import { useAllUserQuotesData } from "@/components/api/AllUserQuotes";
+import { useUserQuotes2 } from "@/components/firebase/Hook/UserQuotes";
 import { QuoteData } from "@/types/QuoteData";
 import { Inter, Montserrat } from "@next/font/google";
 import * as React from "react";
 import { CreateButton } from "../CreateButton";
-import { MultiSelectBox } from "../SelectBox/MultiSelectBox";
 import { LibraryLeftMenu } from "../LibraryLeftMenu";
+import { NewQuoteButton } from "../NewQuoteButton";
 import { Overlay } from "../Overlay";
 import { QuoteContainer } from "../QuoteContainer";
 import { QuoteInput } from "../QuoteInput";
+import { MultiSelectBox } from "../SelectBox/MultiSelectBox";
 import { StandardButton } from "../StandardButton";
-import styles from "./MainLibraryContainer.module.css";
+import { useUserAuthors, useUserSources } from "../UserData/UserQuotes";
+import { useQuotesData } from "../api/AllQuotes";
+import { useCurrentUser } from "../firebase/Hook/Auth";
 import { AllQuotesLibrary } from "./AllQuotesLibrary";
 import { AuthorLibrary } from "./AuthorLibrary";
+import styles from "./MainLibraryContainer.module.css";
 
 export type LibraryType = "AllQuotes" | "Favorites" | "Authors" | "Sources";
 
 interface MainLibraryContainerProps {
-  quotes: QuoteData[] | undefined;
+  userId: string;
   type: LibraryType;
 }
 
 export const MainLibraryContainerProps: React.FunctionComponent<
   MainLibraryContainerProps
 > = (props) => {
-  const { quotes, type } = props;
+  const { type, userId } = props;
+
   const [isQuickAddActive, setIsQuickAddActive] =
     React.useState<boolean>(false);
   const onShowQuickAdd = () => {
@@ -32,6 +40,10 @@ export const MainLibraryContainerProps: React.FunctionComponent<
   const onQuickAddHide = () => {
     setIsQuickAddActive(false);
   };
+  const { data: quotes } = useUserQuotes(userId);
+  const authors = useUserAuthors(userId);
+  const sources = useUserSources(userId);
+  const quotes2 = useQuotesData();
 
   return (
     <>
@@ -43,9 +55,11 @@ export const MainLibraryContainerProps: React.FunctionComponent<
               className={styles.createButtonContainer}
               style={{ height: "100" }}
             >
-              <StandardButton text={"Quick add"} callback={onShowQuickAdd} />
+              <NewQuoteButton userId={userId} />
             </div>
-            <LibraryLeftMenu />
+            <div className={styles.leftMenuFrame}>
+              <LibraryLeftMenu />
+            </div>
           </div>
           <div className={styles.contentContainer}>
             {type === "Authors" ? (

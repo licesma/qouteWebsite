@@ -7,7 +7,7 @@ import Select, {
   StylesConfig,
 } from "react-select";
 import styles from "./CreateButton.module.css";
-import type { MultiSelectBoxProps, FilterOption } from "./SelectBoxTypes";
+import type { FilterOption, MultiSelectBoxProps } from "./SelectBoxTypes";
 import { colourStyles } from "./SelectBoxTypes";
 
 export const MultiSelectBox: React.FunctionComponent<MultiSelectBoxProps> = (
@@ -22,8 +22,6 @@ export const MultiSelectBox: React.FunctionComponent<MultiSelectBoxProps> = (
     value: stringOption,
     label: stringOption,
   }));
-
-  React.useEffect(() => console.log(stringOptions));
 
   const onSelect = (choices: MultiValue<FilterOption>) => {
     onStringSelect(choices.map((choice) => choice.value));

@@ -1,0 +1,62 @@
+.addDialogue {
+  height: 20px;
+  width: 20px;
+  margin: auto;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(3, 152, 97);
+  color: white;
+  font-size: 24px;
+  line-height: 20px;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.addDialogue:hover,
+.addDialogue:focus {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: 0;
+  background-color: rgba(3, 152, 97, 0.9);
+  box-shadow: 0 -1px 0 rgba(11, 87, 208, 0.04), 0 4px 3px rgba(11, 87, 208, 0.3);
+}
+
+.textArea {
+  overflow: hidden;
+  resize: none;
+  border: none;
+  margin: 10px 0px;
+}
+
+.quoteContainer {
+  display: grid;
+  grid-template-columns: 4px auto 160px;
+  gap: 4px;
+}
+
+.inputContainer {
+  display: grid;
+}
+
+.leftBar {
+  width: 4px;
+  height: 100%;
+  border-radius: 2px;
+  background-color: rgb(3, 152, 97);
+}
+
+.speakerInput {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.controlContainer {
+  display: grid;
+}
+
+.dismissButton {
+  margin: auto;
+}

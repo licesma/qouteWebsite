@@ -1,0 +1,39 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 40px;
+  gap: 10px;
+}
+
+.mainInput {
+  overflow: hidden;
+  resize: none;
+  border: none;
+  margin: 10px 0px;
+}
+
+.mainInput:focus {
+  outline: 0;
+}
+.speakerContainer {
+  display: grid;
+  grid-auto-flow: column;
+  line-height: 30px;
+}
+
+.speakerLine {
+  margin: auto;
+  transform: translateY(-3px);
+}
+.speaker {
+  min-width: none;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.dismissContainer {
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+}

@@ -13,40 +13,54 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 
 interface QuoteElementProps {
   quoteData: QuoteData;
+  hideAuthor?: boolean;
+  hideSource?: boolean;
 }
 
 export const QuoteElement: React.FunctionComponent<QuoteElementProps> = (
   props
 ) => {
-  const { quoteData: data } = props;
+  const { quoteData: data, hideAuthor, hideSource } = props;
 
   return data.isConversation ? (
-    <ConversationQuoteElement quoteData={data as ConversationQuoteData} />
+    <ConversationQuoteElement
+      quoteData={data as ConversationQuoteData}
+      hideAuthor={hideAuthor}
+      hideSource={hideSource}
+    />
   ) : (
-    <StandardQuoteElement quoteData={data as StandardQuoteData} />
+    <StandardQuoteElement
+      quoteData={data as StandardQuoteData}
+      hideAuthor={hideAuthor}
+      hideSource={hideSource}
+    />
   );
 };
 
 interface StandardQuoteElementProps {
   quoteData: StandardQuoteData;
+  hideAuthor?: boolean;
+  hideSource?: boolean;
 }
 
 export const StandardQuoteElement: React.FunctionComponent<
   StandardQuoteElementProps
 > = (props) => {
-  const { quoteData: data } = props;
+  const { quoteData: data, hideAuthor, hideSource } = props;
 
   return (
     <div className={styles.container}>
       <div className={styles.activeBar} />
       <div className={styles.textContainer}>
         <div className={`${montserrat.className}`}>{`“${data.quote}”`}</div>
-        <div className={`${styles.author} ${montserrat.className}`}>
-          ~ {data.author}
-          {data.source ? (
-            <span className={styles.reference}>, {data.source}</span>
-          ) : null}
-        </div>
+        {(data.author && !hideAuthor) || (data.source && !hideSource) ? (
+          <div className={`${styles.author} ${montserrat.className}`}>
+            — {data.author && !hideAuthor ? `${data.author}, ` : undefined}
+            {data.source && !hideSource ? (
+              <span className={styles.reference}>{data.source}</span>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </div>
   );
@@ -54,12 +68,14 @@ export const StandardQuoteElement: React.FunctionComponent<
 
 interface ConversationQuoteElementProps {
   quoteData: ConversationQuoteData;
+  hideAuthor?: boolean;
+  hideSource?: boolean;
 }
 
 export const ConversationQuoteElement: React.FunctionComponent<
   ConversationQuoteElementProps
 > = (props) => {
-  const { quoteData: data } = props;
+  const { quoteData: data, hideAuthor, hideSource } = props;
 
   return (
     <div className={styles.container}>
@@ -73,12 +89,14 @@ export const ConversationQuoteElement: React.FunctionComponent<
           />
         ))}
         <div className={styles.sourceData}>
-          <div className={`${styles.author} ${montserrat.className}`}>
-            ~ {data.author}
-            {data.source ? (
-              <span className={styles.reference}>, {data.source}</span>
-            ) : null}
-          </div>
+          {(data.author && !hideAuthor) || (data.source && !hideSource) ? (
+            <div className={`${styles.author} ${montserrat.className}`}>
+              — {data.author && !hideAuthor ? `${data.author}, ` : undefined}
+              {data.source && !hideSource ? (
+                <span className={styles.reference}>{data.source}</span>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
@@ -94,7 +112,7 @@ export const ConversationItem: React.FunctionComponent<ConversationQuote> = (
     <div className={`${montserrat.className}`}>
       {`“${quote}”   `}
       <span className={`${styles.interlocutor} ${montserrat.className}`}>
-        — {interlocutor}
+        - {interlocutor}
       </span>
     </div>
   );

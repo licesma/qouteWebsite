@@ -1,9 +1,9 @@
-import { useFirestore } from "@/components/firebase/FirebaseProvider";
 import { FocusQuote } from "@/components/FocusQuote";
-import { NavigationBar } from "@/components/NavigationBar";
 import { YourLibrary } from "@/components/Library/MainLibraryContainer";
+import { NavigationBar } from "@/components/NavigationBar";
 import { QuoteContainer } from "@/components/QuoteContainer";
 import { QuoteInput } from "@/components/QuoteInput";
+import { useFirestore } from "@/components/firebase/FirebaseProvider";
 import { QuoteData } from "@/types/QuoteData";
 import { Inter } from "@next/font/google";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
@@ -20,11 +20,8 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const docRef = doc(firestore, "quotes", "yQ1QRTVFTNVPCtRRKICa");
-      console.log(docRef);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap);
       const docObject = docSnap.data();
-      console.log(docObject);
       const arrayData: QuoteData[] = docObject ? Object.values(docObject) : [];
       setQuotes(arrayData);
       setHasFetched(true);

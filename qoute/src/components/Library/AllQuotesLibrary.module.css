@@ -11,7 +11,11 @@
   max-width: 800px;
 }
 
-.quoteList {
+.libraryContainer {
   margin: 12px 0px 0px 00px;
   transition: 500ms;
+  max-width: 900px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
 }

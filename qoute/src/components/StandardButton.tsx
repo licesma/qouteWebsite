@@ -1,6 +1,6 @@
+import { inter_cn } from "@/components/fonts";
 import { Open_Sans } from "@next/font/google";
 import styles from "./StandardButton.module.css";
-const open = Open_Sans({ subsets: ["latin"], weight: "400" });
 
 export interface StandardButtonProps {
   text: string;
@@ -18,9 +18,7 @@ export const StandardButton: React.FunctionComponent<StandardButtonProps> = (
   const halfSize = Math.floor(fontSize ? fontSize / 2 : 0);
   return (
     <button
-      className={`${className ? styles.className + " " : ""}${styles.button} ${
-        open.className
-      }`}
+      className={inter_cn(styles.button)}
       style={{
         fontSize: fontSize ? `${fontSize}px` : undefined,
         padding: fontSize ? `${halfSize / 4}px ${halfSize}px` : undefined,

@@ -15,15 +15,15 @@ export const useUpdateProfilePicture = () => {
   const { refetch } = useFetchProfilePicture();
 
   const setProfilePictureCallback = React.useCallback(
-    (param: ProfilePictureParam) => {
-      return uploadBytes(ref(storage, `users/${id}`), param.blob);
+    (blob: Blob) => {
+      return uploadBytes(ref(storage, `users/${id}`), blob);
     },
     [storage, id]
   );
 
   return useMutation({
     mutationFn: setProfilePictureCallback,
-    onSuccess: (data) => {
+    onSuccess: () => {
       refetch();
     },
   });

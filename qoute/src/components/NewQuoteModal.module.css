@@ -1,0 +1,57 @@
+.container {
+  display: grid;
+  margin: 10px;
+  font-size: 20px;
+  gap: 20px;
+}
+
+.authorContainer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  padding-bottom: 10px;
+  gap: 6px;
+  grid-auto-flow: column;
+  box-shadow: 0px 1px 0px #ececec;
+}
+
+.labelAuthor {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.inputAuthor {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.addButton {
+  height: 40px;
+  width: 40px;
+  margin: auto;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(11, 87, 208);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 66px;
+  line-height: 70px;
+}
+
+.addButton:hover,
+.addButton:focus {
+  border: none;
+  outline: 0;
+  background-color: rgba(11, 87, 208, 0.9);
+  box-shadow: 0 -1px 0 rgba(11, 87, 208, 0.04), 0 4px 3px rgba(11, 87, 208, 0.3);
+}
+
+.suggestions {
+  width: 300px;
+  height: 600px;
+  position: absolute;
+  transform: translateY(10px);
+  border-radius: 10px;
+  background: red;
+}

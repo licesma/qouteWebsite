@@ -1,12 +1,12 @@
-import styles from "./AllQuotesLibrary.module.css";
+import { QuoteData } from "@/types/QuoteData";
 import * as React from "react";
-import { MultiSelectBox } from "../SelectBox/MultiSelectBox";
 import { QuoteContainer } from "../QuoteContainer";
+import { MultiSelectBox } from "../SelectBox/MultiSelectBox";
 import {
   getUnrepeatedAuthors,
   getUnrepeatedSources,
 } from "../page_components/Helper";
-import { QuoteData } from "@/types/QuoteData";
+import styles from "./AllQuotesLibrary.module.css";
 
 export interface AllQuotesLibraryProps {
   quotes: QuoteData[] | undefined;
@@ -64,7 +64,7 @@ export const AllQuotesLibrary: React.FunctionComponent<
           />
         </div>
       </div>
-      <div className={styles.quoteList}>
+      <div className={styles.libraryContainer}>
         <QuoteContainer quotes={selectedQuotes} />
       </div>
     </>

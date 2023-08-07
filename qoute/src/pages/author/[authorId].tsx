@@ -1,44 +1,52 @@
-import { Inter } from "@next/font/google";
+import { ChangePictureModal } from "@/components/ChangePictureModal";
+import { EditablePersona } from "@/components/EditablePersona";
+import { NavigationBar } from "@/components/NavigationBar";
+import { Persona } from "@/components/Persona";
+import { ULink } from "@/components/ULink";
+import {
+  useAuthorName,
+  useAuthorTopQuotes,
+  useAuthorTopSources,
+} from "@/components/api/AuthorApi";
+import {
+  useAuthorPicture,
+  useUpdateAuthorPicture,
+} from "@/components/firebase/Hook/AuthorPicture";
+import { inter_cn, montse_cn, nuno_cn } from "@/components/fonts";
+import { StandardQuoteData } from "@/types/QuoteData";
+import { Switch } from "antd";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { GUTENLY_BASE } from "@/app/constants/Navigation";
-import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import * as React from "react";
 import styles from "./author.module.css";
-import Image from "next/image";
-import { Switch } from "antd";
-import { useAuth } from "@/components/firebase/FirebaseProvider";
-import { useCurrentUser } from "@/components/firebase/Hook/Auth";
-import { UserRegister } from "@/components/page_components/UserRegister";
-import { Persona } from "@/components/Persona";
-import { PersonaEditor } from "@/components/PersonaEditor";
-import { NavigationBar } from "@/components/NavigationBar";
-import { MainLibraryContainerProps } from "@/components/Library/MainLibraryContainer";
-import { inter_cn, montse_cn, nuno_cn } from "@/components/fonts";
 
-const forceRegister = true;
+const MAX_SOURCES = 5;
+const MAX_QUOTES = 6;
 
-export default function VerifySignInPage() {
-  const [isFirstTimeUser, setIsFirstTimeUser] = React.useState(false);
-  const [isUserVerified, setIsUserVerified] = React.useState(false);
+const GABO_ID = "dEkqD6RmBo9D8zjmUKMF";
+const TARA_ID = "1fXFvWBAHBbcBjGs7rbS";
+
+export default function AuthorBasePage() {
   const router = useRouter();
-  const { auth } = useAuth();
-  const authorId = router.query.authorId;
-  const { name, email } = useCurrentUser();
+  const authorId: string | undefined =
+    typeof router.query.authorId === "string"
+      ? router.query.authorId
+      : undefined;
+
+  return authorId ? <AuthorPage authorId={authorId} /> : null;
+}
+
+export const AuthorPage: React.FunctionComponent<{ authorId: string }> = (
+  props
+) => {
+  const { authorId } = props;
+  const { data: name } = useAuthorName(authorId);
+  const { data: topSources } = useAuthorTopSources(authorId, MAX_SOURCES);
+  const { data: topQuotes } = useAuthorTopQuotes(authorId, MAX_QUOTES);
   const [isSwitchInGutenly, setIsSwitchInGutenly] = React.useState(false);
-
-  React.useEffect(() => {
-    console.log(authorId);
-  }, [authorId]);
-
-  React.useEffect(() => {
-    if (isUserVerified && email && !name) {
-      setIsFirstTimeUser(true);
-    }
-  }, [isUserVerified, email, name]);
-
-  if (email && name) {
-    window.location.replace(`${GUTENLY_BASE}/`);
-  }
+  const { data: authorPicture } = useAuthorPicture(authorId);
+  const authorPictureMutator = useUpdateAuthorPicture(authorId);
 
   return (
     <main className={styles.main}>
@@ -46,11 +54,16 @@ export default function VerifySignInPage() {
       <div className={styles.authorPageContainer}>
         <div className={styles.authorContainer}>
           <div className={styles.authorHeader}>
-            <Persona size={200} name={"Garcia Marquez"} />
+            <EditablePersona
+              size={200}
+              name={name}
+              imageLink={authorPicture}
+              updateImageCallback={(file: Blob) => {
+                authorPictureMutator.mutate(file);
+              }}
+            />
             <div className={styles.nameAndSwitch}>
-              <h1 className={inter_cn(styles.authorName)}>
-                Gabriel García Márquez
-              </h1>
+              <h1 className={inter_cn(styles.authorName)}>{name}</h1>
               <Switch
                 className={styles.switch}
                 style={{
@@ -76,30 +89,40 @@ export default function VerifySignInPage() {
           <div className={styles.popularBooksContainer}>
             <div className={inter_cn(styles.sectionHeader)}>
               <div className={inter_cn(styles.sectionLabel)}>Books</div>
-              <div className={nuno_cn(styles.seeAllLink)}>All books</div>
+              <ULink
+                className={nuno_cn(styles.seeAllLink)}
+                href={`/author/sources/${authorId}`}
+              >
+                All books
+              </ULink>
             </div>
             <div className={inter_cn(styles.popularBooks)}>
-              {[getBook(), getBook(), getBook(), getBook()]}
+              {topSources?.map((source, index) => getBook(source.name, index))}
             </div>
           </div>
           <div className={styles.popularQuotesContainer}>
             <div className={inter_cn(styles.sectionHeader)}>
               <div className={inter_cn(styles.sectionLabel)}>Quotes</div>
-              <div className={nuno_cn(styles.seeAllLink)}>All quotes</div>
+              <ULink
+                className={nuno_cn(styles.seeAllLink)}
+                href={`/author/quotes/${authorId}`}
+              >
+                All quotes
+              </ULink>
             </div>
             <div className={inter_cn(styles.popularQuotes)}>
-              {[getQuote(), getQuote(), getQuote(), getQuote()]}
+              {topQuotes?.map((quote, index) => getQuote(quote, index))}
             </div>
           </div>
         </div>
       </div>
     </main>
   );
-}
+};
 
-export function getBook() {
+export function getBook(name: string, index: number) {
   return (
-    <div className={styles.authorBookCard}>
+    <div key={index} className={styles.authorBookCard}>
       <Image
         className={styles.authorBookImage}
         alt={"ok"}
@@ -107,22 +130,16 @@ export function getBook() {
         height={180}
         src={"/book_placeholder.svg"}
       />
-      <div className={styles.authorBookTitle}>
-        El amor en los tiempos del Colera
-      </div>
+      <div className={styles.authorBookTitle}>{name}</div>
     </div>
   );
 }
 
-export function getQuote() {
+export function getQuote(data: StandardQuoteData, index: number) {
   return (
-    <div className={styles.authorQuoteCard}>
-      <div className={styles.authorQuote}>
-        Esta vida que nos hace padre de nuestros padres
-      </div>
-      <div className={styles.authorQuoteSource}>
-        -El amor en los tiempos del Cólera
-      </div>
+    <div key={index} className={styles.authorQuoteCard}>
+      <div className={styles.authorQuote}>{data.quote}</div>
+      <div className={styles.authorQuoteSource}>-{data.source}</div>
     </div>
   );
 }

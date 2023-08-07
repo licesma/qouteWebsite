@@ -1,0 +1,12 @@
+.container {
+  padding: 10px;
+  box-shadow: 0px 1px 0px #ececec;
+  display: grid;
+  cursor: pointer;
+  user-select: none;
+  gap: 10px;
+}
+
+.container:hover {
+  background-color: #eeeeee;
+}

@@ -9,14 +9,14 @@ export interface ImageCropperProps {
   size: number;
   imageSrc: string;
   onDismiss: () => void;
-  onSave: (url: string) => void;
+  onSave: (imageUrl: string) => void;
+  updatePictureCallback: (file: Blob) => void;
 }
 
 export const ImageCropper: React.FunctionComponent<ImageCropperProps> = (
   props
 ) => {
-  const { size, onDismiss, onSave, imageSrc } = props;
-  const dat = useUpdateProfilePicture();
+  const { size, onDismiss, onSave, imageSrc, updatePictureCallback } = props;
   const cropperRef = React.createRef<ReactCropperElement>();
 
   const onCrop = () => {
@@ -27,7 +27,7 @@ export const ImageCropper: React.FunctionComponent<ImageCropperProps> = (
         .toDataURL();
       cropUrl &&
         cropperRef.current?.cropper.getCroppedCanvas().toBlob((file) => {
-          file && dat.mutate({ blob: file, pictureUrl: cropUrl });
+          file && updatePictureCallback(file);
           onSave(cropUrl);
         });
     }

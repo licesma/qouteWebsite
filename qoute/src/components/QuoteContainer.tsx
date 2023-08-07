@@ -6,15 +6,23 @@ import { QuoteElement } from "./QuoteElement";
 
 interface QuoteContainerProps {
   quotes: QuoteData[] | undefined;
+  hideAuthor?: boolean;
+  hideSource?: boolean;
 }
 
-export const QuoteContainer: React.FunctionComponent<QuoteContainerProps> = ({
-  quotes,
-}) => {
+export const QuoteContainer: React.FunctionComponent<QuoteContainerProps> = (
+  props
+) => {
+  const { quotes, hideAuthor, hideSource } = props;
   return (
     <div className={styles.container}>
       {quotes?.map((quote, index) => (
-        <QuoteElement key={index} quoteData={quote} />
+        <QuoteElement
+          key={index}
+          quoteData={quote}
+          hideAuthor={hideAuthor}
+          hideSource={hideSource}
+        />
       ))}
     </div>
   );

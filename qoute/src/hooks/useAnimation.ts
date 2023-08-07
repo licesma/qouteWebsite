@@ -63,8 +63,6 @@ export const useAnimation = (
     }
   }, [animation]);
 
-  React.useEffect(() => console.log(animation), [animation]);
-  React.useEffect(() => console.log(triggerAnimation), [triggerAnimation]);
   return { triggerAnimation };
 };
 
